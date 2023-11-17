@@ -20,7 +20,7 @@ namespace DopeBoys
     {
         private const string ModId = "com.phalex.rounds.DopeBoys";
         private const string ModName = "DopeBoys";
-        public const string Version = "0.1.0"; // What version are we on (major.minor.patch)?
+        public const string Version = "0.1.0";
         public const string ModInitials = "DB";
 
         public static DopeBoys instance { get; private set; }
@@ -36,6 +36,9 @@ namespace DopeBoys
         {
             instance = this;
             CustomCard.BuildCard<StinkMaster>();
+            CustomCard.BuildCard<WiggleWiggle>();
+            CustomCard.BuildCard<SamTurret>();
+            CustomCard.BuildCard<Smoot>();
         }
     }
 }

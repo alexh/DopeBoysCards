@@ -1,64 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using UnboundLib.Cards;
+using UnityEngine;
 using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
-
+using DopeBoys.RoundsEffects;
 
 namespace DopeBoys.Cards
 {
-    class StinkMaster : CustomCard
+    internal class WiggleWiggle : CustomCard
     {
 
-        public static GameObject toxicObj;
+        public const float CD_TIME_SEC = 4f;
+
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
-            block.forceToAdd = -8f;
-            statModifiers.health = 1.2f;
-            block.cdAdd = 0.25f;
+            gun.attackSpeedMultiplier = 1.25f;
+            //UnityEngine.Debug.Log($"[{DopeBoys.ModInitials}][Card] {GetTitle()} has been setup.");
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             //Edits values on player when card is selected
+            //UnityEngine.Debug.Log($"[{DopeBoys.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
 
-            // load toxic cloud effect from Toxic cloud card
-            GameObject? toxicCloud = (GameObject)Resources.Load("0 cards/Toxic cloud");
-            toxicObj = toxicCloud.GetComponent<Gun>().objectsToSpawn[0].effect;
-
-            
-            var objToSpawn = new List<GameObject>
-            {
-                toxicObj,
-                toxicObj,
-                toxicObj
-            };
-            block.objectsToSpawn = objToSpawn;
+            WiggleWiggleEffect mono = player.gameObject.AddComponent<WiggleWiggleEffect>();
+            mono.CardAmount++;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             //Run when the card is removed from the player
-            if (block.objectsToSpawn.Contains(toxicObj))    //It should contain it, but just to avoid errors
-            {
-                block.objectsToSpawn.Remove(toxicObj);
-            }
-            else
-            {
-                UnityEngine.Debug.LogWarning("No Toxic Objects Found even though Stink Master was removed");
-            }
+            player.gameObject.GetComponentInChildren<WiggleWiggleEffect>().CardAmount--;
+            //UnityEngine.Debug.Log($"[{DopeBoys.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
         }
 
 
         protected override string GetTitle()
         {
-            return "Stink Master";
+            return "Wiggle Wiggle";
         }
         protected override string GetDescription()
         {
-            return "Hello I'm stinkmaster!\nAdds a noxious cloud to your block";
+            return "<color=#FC0FC0>WWPL</color>\n Make your opponent <color=#FC0FC0>wiggle</color> when you hit them";
         }
         protected override GameObject GetCardArt()
         {
@@ -66,32 +51,24 @@ namespace DopeBoys.Cards
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Rare;
+            return CardInfo.Rarity.Uncommon;
         }
         protected override CardInfoStat[] GetStats()
         {
             return new CardInfoStat[]
             {
-                 new CardInfoStat()
+                new CardInfoStat()
                 {
-                    positive = true,
-                    stat = "Block Cooldown",
-                    amount = "+0.25s",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                  new CardInfoStat()
-                {
-                    positive = true,
-                    stat = "Health",
-                    amount = "+20%",
+                    positive = false,
+                    stat = "ATK SPD",
+                    amount = "-25%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
-   
             };
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()
         {
-            return CardThemeColor.CardThemeColorType.PoisonGreen;
+            return CardThemeColor.CardThemeColorType.MagicPink;
         }
         public override string GetModName()
         {
