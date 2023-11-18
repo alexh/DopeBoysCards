@@ -62,7 +62,7 @@ namespace DopeBoys.Cards
         }
         protected override GameObject GetCardArt()
         {
-            return null;
+            return DeckSmithUtil.Instance.GetArtFromUrl("https://raw.githubusercontent.com/alexh/DopeBoysCards/main/Assets/Cards/StinkMaster2.png");
         }
         protected override CardInfo.Rarity GetRarity()
         {

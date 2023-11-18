@@ -1,8 +1,8 @@
 {
     "name": "DopeBoys",
-    "version_number": "0.3.0",
-    "website_url": "https://github.com/alexh/DopeBoys",
-    "description": "Adds 5 new vanilla-like cards to the game. Under active development!",
+    "version_number": "0.4.0",
+    "website_url": "https://github.com/alexh/DopeBoysCards",
+    "description": "Adds 5 new vanilla-like cards with art to the game. Under active development!",
     "dependencies": [
         "willis81808-UnboundLib-3.2.12",
         "Pykess-ModdingUtils-0.4.7",
@@ -11,6 +11,7 @@
         "BepInEx-BepInExPack_ROUNDS-5.4.1900",
         "willis81808-MMHook-1.0.0",
         "willis81808-ModsPlus-1.5.7",
-        "RoundsModding-AllThePatch-1.0.0"
+        "RoundsModding-AllThePatch-1.0.0",
+        "willis81808-DeckSmithUtil-1.0.0"
     ]
 }

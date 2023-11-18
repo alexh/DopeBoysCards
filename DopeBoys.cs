@@ -4,6 +4,8 @@ using UnboundLib.Cards;
 using DopeBoys.Cards;
 using HarmonyLib;
 using CardChoiceSpawnUniqueCardPatch.CustomCategories;
+using static DeckSmithUtil;
+using UnityEngine;
 
 
 namespace DopeBoys
@@ -24,7 +26,6 @@ namespace DopeBoys
         public const string ModInitials = "DB";
 
         public static DopeBoys instance { get; private set; }
-
 
         void Awake()
         {

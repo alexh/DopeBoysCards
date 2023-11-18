@@ -45,7 +45,7 @@ namespace DopeBoys.Cards
         }
         protected override GameObject GetCardArt()
         {
-            return null;
+            return DeckSmithUtil.Instance.GetArtFromUrl("https://raw.githubusercontent.com/alexh/DopeBoysCards/main/Assets/Cards/Smoot.png");
         }
         protected override CardInfo.Rarity GetRarity()
         {
