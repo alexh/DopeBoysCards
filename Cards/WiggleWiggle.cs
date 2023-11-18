@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using UnboundLib.Cards;
 using UnityEngine;
-using UnboundLib;
-using UnboundLib.Cards;
-using UnityEngine;
 using DopeBoys.RoundsEffects;
+using DopeBoys.Extensions;
 
 namespace DopeBoys.Cards
 {
@@ -27,12 +25,12 @@ namespace DopeBoys.Cards
             //UnityEngine.Debug.Log($"[{DopeBoys.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
 
             WiggleWiggleEffect mono = player.gameObject.AddComponent<WiggleWiggleEffect>();
-            mono.CardAmount++;
+            characterStats.GetAdditionalData().wiggle++;
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             //Run when the card is removed from the player
-            player.gameObject.GetComponentInChildren<WiggleWiggleEffect>().CardAmount--;
+            characterStats.GetAdditionalData().wiggle--;
             //UnityEngine.Debug.Log($"[{DopeBoys.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
         }
 

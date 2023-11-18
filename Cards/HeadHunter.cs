@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DopeBoys.Extensions;
+using DopeBoys.RoundsEffects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,37 +12,36 @@ using UnityEngine;
 
 namespace DopeBoys.Cards
 {
-    class SamTurret : CustomCard
+    class HeadHunter : CustomCard
     {
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
-            statModifiers.movementSpeed = 0.01f;
-            gun.ammo = 15;
-            gun.attackSpeedMultiplier = .75f;
-            statModifiers.jump = .5f;
-            statModifiers.gravity = 1.5f;
-            UnityEngine.Debug.Log($"[{DopeBoys.ModInitials}][Card] {GetTitle()} has been setup.");
+            //UnityEngine.Debug.Log($"[{DopeBoys.ModInitials}][Card] {GetTitle()} has been setup.");
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             //Edits values on player when card is selected
-            UnityEngine.Debug.Log($"[{DopeBoys.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
+            HeadHunterEffect mono = player.gameObject.AddComponent<HeadHunterEffect>();
+            HeadHunterReversibleEffect hhre = player.gameObject.GetOrAddComponent<HeadHunterReversibleEffect>();
+            characterStats.GetAdditionalData().headhunter++;
+            //UnityEngine.Debug.Log($"[{DopeBoys.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             //Run when the card is removed from the player
-            UnityEngine.Debug.Log($"[{DopeBoys.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
+            characterStats.GetAdditionalData().headhunter--;
+            //UnityEngine.Debug.Log($"[{DopeBoys.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
         }
 
 
         protected override string GetTitle()
         {
-            return "SAM Turret";
+            return "Head Hunter";
         }
         protected override string GetDescription()
         {
-            return "Iced out like SAM so they call me a Berg";
+            return "Are you Colm O'Driscoll?";
         }
         protected override GameObject GetCardArt()
         {
@@ -48,7 +49,7 @@ namespace DopeBoys.Cards
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Rare;
+            return CardInfo.Rarity.Common;
         }
         protected override CardInfoStat[] GetStats()
         {
@@ -57,36 +58,15 @@ namespace DopeBoys.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Ammo",
-                    amount = "+15",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = true,
-                    stat = "ATK Speed",
-                    amount = "-25%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = false,
-                    stat = "Move Speed",
-                    amount = "-99%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = false,
-                    stat = "Gravity",
+                    stat = "DMG per Kill",
                     amount = "+50%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
-                    positive = false,
-                    stat = "Jump Height",
-                    amount = "-50%",
+                    positive = true,
+                    stat = "Resets every Round",
+                    amount = "",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
             };

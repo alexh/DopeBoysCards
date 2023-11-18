@@ -39,6 +39,7 @@ namespace DopeBoys
             CustomCard.BuildCard<WiggleWiggle>();
             CustomCard.BuildCard<SamTurret>();
             CustomCard.BuildCard<Smoot>();
+            CustomCard.BuildCard<HeadHunter>();
         }
     }
 }

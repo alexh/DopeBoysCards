@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*using DopeBoys.RoundsEffects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,21 +11,18 @@ using UnityEngine;
 
 namespace DopeBoys.Cards
 {
-    class SamTurret : CustomCard
+    class Jacker : CustomCard
     {
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
-            statModifiers.movementSpeed = 0.01f;
-            gun.ammo = 15;
-            gun.attackSpeedMultiplier = .75f;
-            statModifiers.jump = .5f;
-            statModifiers.gravity = 1.5f;
             UnityEngine.Debug.Log($"[{DopeBoys.ModInitials}][Card] {GetTitle()} has been setup.");
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             //Edits values on player when card is selected
+            JackerEffect mono = player.gameObject.AddComponent<JackerEffect>();
+            mono.CardAmount++;
             UnityEngine.Debug.Log($"[{DopeBoys.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
         }
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
@@ -36,11 +34,11 @@ namespace DopeBoys.Cards
 
         protected override string GetTitle()
         {
-            return "SAM Turret";
+            return "CardName";
         }
         protected override string GetDescription()
         {
-            return "Iced out like SAM so they call me a Berg";
+            return "CardDescription";
         }
         protected override GameObject GetCardArt()
         {
@@ -48,7 +46,7 @@ namespace DopeBoys.Cards
         }
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Rare;
+            return CardInfo.Rarity.Common;
         }
         protected override CardInfoStat[] GetStats()
         {
@@ -57,43 +55,15 @@ namespace DopeBoys.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Ammo",
-                    amount = "+15",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = true,
-                    stat = "ATK Speed",
-                    amount = "-25%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = false,
-                    stat = "Move Speed",
-                    amount = "-99%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = false,
-                    stat = "Gravity",
-                    amount = "+50%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
-                    positive = false,
-                    stat = "Jump Height",
-                    amount = "-50%",
+                    stat = "Effect",
+                    amount = "No",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
             };
         }
         protected override CardThemeColor.CardThemeColorType GetTheme()
         {
-            return CardThemeColor.CardThemeColorType.DestructiveRed;
+            return CardThemeColor.CardThemeColorType.ColdBlue;
         }
         public override string GetModName()
         {
@@ -101,3 +71,4 @@ namespace DopeBoys.Cards
         }
     }
 }
+*/
