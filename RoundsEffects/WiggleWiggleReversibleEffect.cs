@@ -22,7 +22,7 @@ namespace DopeBoys.RoundsEffects
         public ReversibleColorEffect colorEffect;
         public override void OnAwake()
         {
-            this.duration = this.stats.GetAdditionalData().wiggle * 1f;
+            this.duration = this.stats.GetAdditionalData().wiggle * 2f;
             this.colorEffect = this.player.gameObject.AddComponent<ReversibleColorEffect>();
             this.colorEffect.SetColor(this.color);
             //UnityEngine.Debug.Log($"[{DopeBoys.ModInitials}] wiggling player {this.player.playerID} for {duration} seconds");
@@ -36,6 +36,16 @@ namespace DopeBoys.RoundsEffects
                 Destroy();
             }
             var damagedPlayer = this.player;
+            damagedPlayer.data.movement.Move((damage + Vector2.up) * 1f);
+            damagedPlayer.data.movement.Move((-damage + Vector2.up) * 1f);
+            damagedPlayer.data.movement.Move((damage + Vector2.up) * 1f);
+            damagedPlayer.data.movement.Move((-damage + Vector2.up) * 1f);
+            damagedPlayer.data.movement.Move((damage + Vector2.up) * 1f);
+            damagedPlayer.data.movement.Move((-damage + Vector2.up) * 1f);
+            damagedPlayer.data.movement.Move((damage + Vector2.up) * 1f);
+            damagedPlayer.data.movement.Move((-damage + Vector2.up) * 1f);
+            damagedPlayer.data.movement.Move((damage + Vector2.up) * 1f);
+            damagedPlayer.data.movement.Move((-damage + Vector2.up) * 1f);
             damagedPlayer.data.movement.Move((damage + Vector2.up) * 1f);
             damagedPlayer.data.movement.Move((-damage + Vector2.up) * 1f);
 
