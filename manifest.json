@@ -1,8 +1,8 @@
 {
     "name": "DopeBoys",
-    "version_number": "0.4.0",
+    "version_number": "0.10.0",
     "website_url": "https://github.com/alexh/DopeBoysCards",
-    "description": "Adds 5 new vanilla-like cards with art to the game. Under active development!",
+    "description": "Adds 6 new vanilla-like cards with art to the game. Under active development!",
     "dependencies": [
         "willis81808-UnboundLib-3.2.12",
         "Pykess-ModdingUtils-0.4.7",

@@ -1,16 +1,24 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using UnboundLib;
 
 namespace DopeBoys.Extensions
 {
     public static class PlayerVelocityExtension
     {
-        public static void AddForce(this PlayerVelocity pv, Vector2 force)
+        public static void AddForce(this PlayerVelocity playerVelocity, Vector2 force, ForceMode2D forceMode)
         {
-            typeof(PlayerVelocity).InvokeMember("AddForce",
-                BindingFlags.Instance | BindingFlags.InvokeMethod |
-                BindingFlags.NonPublic, null, pv, new object[] { force, ForceMode2D.Force });
+            if (forceMode == ForceMode2D.Force)
+            {
+                force *= 0.02f;
+            }
+            else
+            {
+                force *= 1f;
+            }
+
+            playerVelocity.SetFieldValue("velocity", (Vector2)playerVelocity.GetFieldValue("velocity") + (force / (float)playerVelocity.GetFieldValue("mass")));
         }
     }
 }

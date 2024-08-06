@@ -42,13 +42,7 @@ namespace DopeBoys.RoundsEffects
 
         public override void OnUpdate()
         {
-            this.gunStatModifier.bulletDamageMultiplier_mult += gunDmgMultiplier * heads * player.data.stats.GetAdditionalData().headhunter;
-            this.color = Color.HSVToRGB(hue, saturation, value - (valueStepAmount * heads));
-            this.colorEffect.SetColor(this.color);
-            this.colorFlash = base.player.gameObject.GetOrAddComponent<ColorFlash>();
-            this.colorFlash.SetColor(Color.white);
-            this.colorFlash.SetNumberOfFlashes(colorFlashNumFlashes);
-            this.colorFlash.SetDuration(colorFlashDur);
+            this.gunStatModifier.bulletDamageMultiplier_mult += gunDmgMultiplier * heads + 1 * player.data.stats.GetAdditionalData().headhunter + 1;
             UnityEngine.Debug.Log($"[{DopeBoys.ModInitials}] updating headhunter {this.color} {this.gunStatModifier.bulletDamageMultiplier_mult} num heads {heads}");
         }
 

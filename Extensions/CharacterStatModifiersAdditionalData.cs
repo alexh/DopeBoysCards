@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using DopeBoys.Cards;
 using HarmonyLib;
 
 
@@ -12,10 +13,13 @@ namespace DopeBoys.Extensions
         public float wiggle;
 
         public float headhunter;
+
+        public float touchtips;
         public CharacterStatModifiersAdditionalData()
         {
             wiggle = 0;
             headhunter = 0;
+            touchtips = 0;
         }
     }
     public static class CharacterStatModifiersExtension

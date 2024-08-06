@@ -36,18 +36,14 @@ namespace DopeBoys.RoundsEffects
                 Destroy();
             }
             var damagedPlayer = this.player;
-            damagedPlayer.data.movement.Move((damage + Vector2.up) * 1f);
-            damagedPlayer.data.movement.Move((-damage + Vector2.up) * 1f);
-            damagedPlayer.data.movement.Move((damage + Vector2.up) * 1f);
-            damagedPlayer.data.movement.Move((-damage + Vector2.up) * 1f);
-            damagedPlayer.data.movement.Move((damage + Vector2.up) * 1f);
-            damagedPlayer.data.movement.Move((-damage + Vector2.up) * 1f);
-            damagedPlayer.data.movement.Move((damage + Vector2.up) * 1f);
-            damagedPlayer.data.movement.Move((-damage + Vector2.up) * 1f);
-            damagedPlayer.data.movement.Move((damage + Vector2.up) * 1f);
-            damagedPlayer.data.movement.Move((-damage + Vector2.up) * 1f);
-            damagedPlayer.data.movement.Move((damage + Vector2.up) * 1f);
-            damagedPlayer.data.movement.Move((-damage + Vector2.up) * 1f);
+            damagedPlayer.data.playerVel.AddForce(damage * 4 * (float)player.data.playerVel.GetFieldValue("mass"), ForceMode2D.Impulse);
+            damagedPlayer.data.playerVel.AddForce(-damage * 4 * (float)player.data.playerVel.GetFieldValue("mass"), ForceMode2D.Impulse);
+            damagedPlayer.data.playerVel.AddForce(damage * 4 * (float)player.data.playerVel.GetFieldValue("mass"), ForceMode2D.Impulse);
+            damagedPlayer.data.playerVel.AddForce(-damage * 4 * (float)player.data.playerVel.GetFieldValue("mass"), ForceMode2D.Impulse);
+            damagedPlayer.data.playerVel.AddForce(damage * 4 * (float)player.data.playerVel.GetFieldValue("mass"), ForceMode2D.Impulse);
+            damagedPlayer.data.playerVel.AddForce(-damage * 4 * (float)player.data.playerVel.GetFieldValue("mass"), ForceMode2D.Impulse);
+            damagedPlayer.data.playerVel.AddForce(damage * 4 * (float)player.data.playerVel.GetFieldValue("mass"), ForceMode2D.Impulse);
+            damagedPlayer.data.playerVel.AddForce(-damage * 4 * (float)player.data.playerVel.GetFieldValue("mass"), ForceMode2D.Impulse);
 
         }
 
