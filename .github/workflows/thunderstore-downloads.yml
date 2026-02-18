@@ -1,0 +1,46 @@
+name: Thunderstore Downloads
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 15 * * 1"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: thunderstore-downloads
+  cancel-in-progress: false
+
+jobs:
+  update-downloads:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Update Thunderstore downloads
+        id: update
+        run: |
+          python3 .github/scripts/update_thunderstore_downloads.py | tee update-output.txt
+          count=$(grep '^download_count=' update-output.txt | cut -d'=' -f2)
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet -- README.md stats/thunderstore-downloads.json; then
+            echo "No changes detected."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md stats/thunderstore-downloads.json
+          git commit -m "chore(stats): update Thunderstore downloads to ${{ steps.update.outputs.count }}"
+          git push
